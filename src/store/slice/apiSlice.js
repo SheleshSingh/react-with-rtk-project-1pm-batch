@@ -11,7 +11,17 @@ const apiSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    fetchApiData.pending()
+    builder.addCase(fetchApiData.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchApiData.fulfilled, (state, action) => {
+      state.loading = false;
+      state.users = action.payload;
+    });
+    builder.addCase(fetchApiData.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
   },
 });
 

@@ -28,8 +28,12 @@ const Header = () => {
         </button>
       </div>
       {open && (
-        <Dialog setOpen={setOpen} formId={"userCreate"}>
-          <CreateForm />
+        <Dialog
+          setOpen={setOpen}
+          formId={"userCreate"}
+          message={"Create user form"}
+        >
+          <CreateForm setOpen={setOpen} />
         </Dialog>
       )}
     </header>

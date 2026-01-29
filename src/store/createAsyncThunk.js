@@ -4,7 +4,6 @@ export const fetchApiData = createAsyncThunk(
   "userAPi/fetchApiData",
   async () => {
     const res = await api.get("user");
-    const data = await res.json();
-    console.log(data);
+    return res?.data;
   },
 );
