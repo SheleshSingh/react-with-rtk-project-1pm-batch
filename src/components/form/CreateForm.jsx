@@ -1,26 +1,29 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { userCreate } from "../../store/createAsyncThunk";
 
-const CreateForm = ({ setOpen }) => {
+const CreateForm = ({ setOpen, formId }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     profileUrl: "",
     description: "",
   });
+  const dispatch = useDispatch();
 
-  console.log(formData);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(userCreate(formData));
     console.log(formData);
     setOpen(false);
-    console.log("hello");
   };
   return (
     <form
+      id={formId}
       onSubmit={handleSubmit}
       className="w-100 h-fit flex flex-col gap-3 p-5"
     >
@@ -57,17 +60,6 @@ const CreateForm = ({ setOpen }) => {
         value={formData.description}
         onChange={handleChange}
       />
-      <div className="flex justify-end gap-5">
-        <button className="bg-black text-white px-5 py-2 rounded active:scale-80 transition duration-400">
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="bg-black text-white px-5 py-2 rounded active:scale-80 transition duration-400"
-        >
-          Submit
-        </button>
-      </div>
     </form>
   );
 };

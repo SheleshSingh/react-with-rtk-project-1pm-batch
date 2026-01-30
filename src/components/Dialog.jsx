@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-const Dialog = ({ setOpen, children, message }) => {
+const Dialog = ({ setOpen, children, message, formId }) => {
   return (
     <div
       onClick={() => setOpen(false)}
@@ -20,7 +20,21 @@ const Dialog = ({ setOpen, children, message }) => {
           {message || "Enter Form Name"}
         </h1>
         {children}
-       
+        <div className="flex justify-end gap-5">
+          <button
+            onClick={() => setOpen(false)}
+            className="bg-black text-white px-5 py-2 rounded active:scale-80 transition duration-400"
+          >
+            Cancel
+          </button>
+          <button
+            form={formId}
+            type="submit"
+            className="bg-black text-white px-5 py-2 rounded active:scale-80 transition duration-400"
+          >
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

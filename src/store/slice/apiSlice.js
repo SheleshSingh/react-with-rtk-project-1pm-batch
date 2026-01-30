@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchApiData } from "../createAsyncThunk";
+import { fetchApiData, userCreate } from "../createAsyncThunk";
 
 const initialState = {
   users: [],
@@ -19,6 +19,19 @@ const apiSlice = createSlice({
       state.users = action.payload;
     });
     builder.addCase(fetchApiData.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    // user create method post
+    builder.addCase(userCreate.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(userCreate.fulfilled, (state) => {
+      state.loading = false;
+      // state.users = action.payload;
+    });
+    builder.addCase(userCreate.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

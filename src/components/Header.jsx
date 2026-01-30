@@ -30,10 +30,10 @@ const Header = () => {
       {open && (
         <Dialog
           setOpen={setOpen}
-          formId={"userCreate"}
           message={"Create user form"}
+          formId={"userCreate"}
         >
-          <CreateForm setOpen={setOpen} />
+          <CreateForm setOpen={setOpen} formId={"userCreate"} />
         </Dialog>
       )}
     </header>
