@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchApiData, userCreate } from "../createAsyncThunk";
+import { fetchApiData, userCreate, userEdit } from "../createAsyncThunk";
 
 const initialState = {
   users: [],
@@ -32,6 +32,19 @@ const apiSlice = createSlice({
       // state.users = action.payload;
     });
     builder.addCase(userCreate.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+
+    // user edit method put
+
+    builder.addCase(userEdit.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(userEdit.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(userEdit.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

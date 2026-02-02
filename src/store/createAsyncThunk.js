@@ -37,3 +37,16 @@ export const userDelete = createAsyncThunk(
     }
   },
 );
+
+export const userEdit = createAsyncThunk(
+  "userApi/userEdit",
+  async (id, { rejectWithValue, dispatch }) => {
+    try {
+      const res = await api.put(`user/${id}`);
+      dispatch(fetchApiData());
+      return res?.data;
+    } catch (err) {
+      rejectWithValue("Something went wrong", err);
+    }
+  },
+);
