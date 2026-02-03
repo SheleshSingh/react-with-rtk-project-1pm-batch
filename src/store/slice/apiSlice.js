@@ -13,6 +13,7 @@ const apiSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchApiData.pending, (state) => {
       state.loading = true;
+      state.error = null;
     });
     builder.addCase(fetchApiData.fulfilled, (state, action) => {
       state.loading = false;
@@ -26,6 +27,7 @@ const apiSlice = createSlice({
     // user create method post
     builder.addCase(userCreate.pending, (state) => {
       state.loading = true;
+      state.error = null;
     });
     builder.addCase(userCreate.fulfilled, (state) => {
       state.loading = false;
@@ -40,6 +42,7 @@ const apiSlice = createSlice({
 
     builder.addCase(userEdit.pending, (state) => {
       state.loading = true;
+      state.error = null;
     });
     builder.addCase(userEdit.fulfilled, (state) => {
       state.loading = false;

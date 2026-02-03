@@ -1,7 +1,7 @@
 import { Heart, SquarePen, Trash2 } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { userDelete, userEdit } from "../store/createAsyncThunk";
+import { userDelete } from "../store/createAsyncThunk";
 import Dialog from "./Dialog";
 import EditUserForm from "./form/EditUserForm";
 
@@ -32,9 +32,7 @@ const Card = ({ data }) => {
       <p>{data?.description}</p>
       <div className="flex justify-end gap-3">
         <button
-          onClick={() => {
-            (setOpen(true), dispatch(userEdit(data?.id)));
-          }}
+          onClick={() => setOpen(true)}
           className="bg-black p-3 text-white rounded-full active:scale-85 duration-300"
         >
           <SquarePen />
@@ -52,7 +50,7 @@ const Card = ({ data }) => {
           setOpen={setOpen}
           formId={"editUser"}
         >
-          <EditUserForm formId={"editUser"} />
+          <EditUserForm formId={"editUser"} data={data} setOpen={setOpen} />
         </Dialog>
       )}
     </div>

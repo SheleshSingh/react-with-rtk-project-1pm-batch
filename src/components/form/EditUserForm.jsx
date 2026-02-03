@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { userEdit } from "../../store/createAsyncThunk";
 
-const EditUserForm = ({ formId }) => {
+const EditUserForm = ({ formId, data, setOpen }) => {
   const [editUserData, setEditUserData] = useState({
-    name: "",
-    email: "",
-    profileUrl: "",
-    description: "",
+    name: data?.name,
+    email: data?.email,
+    profileUrl: data?.profileUrl,
+    description: data?.description,
   });
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditUserData((prev) => ({ ...prev, [name]: value }));
@@ -14,6 +17,10 @@ const EditUserForm = ({ formId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (data?.id) {
+      dispatch(userEdit({ id: data?.id, details: editUserData }));
+    }
+    setOpen(false);
     console.log(editUserData);
   };
   return (
