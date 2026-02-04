@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-const Dialog = ({ setOpen, children, message, formId }) => {
+const Dialog = ({ setOpen, children, message, formId, text, style }) => {
   return (
     <div
       onClick={() => setOpen(false)}
@@ -8,7 +8,7 @@ const Dialog = ({ setOpen, children, message, formId }) => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className=" bg-amber-200 p-2 rounded-2xl"
+        className=" bg-amber-100 p-2 rounded-2xl"
       >
         <button
           onClick={() => setOpen(false)}
@@ -16,7 +16,10 @@ const Dialog = ({ setOpen, children, message, formId }) => {
         >
           <X />
         </button>
-        <h1 className="text-center text-3xl font-semibold">
+        <h1
+          style={style}
+          className="flex justify-center items-center text-3xl font-semibold"
+        >
           {message || "Enter Form Name"}
         </h1>
         {children}
@@ -32,7 +35,7 @@ const Dialog = ({ setOpen, children, message, formId }) => {
             type="submit"
             className="bg-black text-white px-5 py-2 rounded active:scale-80 transition duration-400"
           >
-            Submit
+            {text || "Submit"}
           </button>
         </div>
       </div>

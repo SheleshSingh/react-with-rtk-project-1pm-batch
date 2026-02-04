@@ -7,7 +7,9 @@ import EditUserForm from "./form/EditUserForm";
 
 const Card = ({ data }) => {
   const [open, setOpen] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
   const dispatch = useDispatch();
+
   return (
     <div className="border-2 border-amber-500 flex flex-col gap-2 rounded overflow-hidden p-2">
       <div className="w-full h-50">
@@ -38,7 +40,9 @@ const Card = ({ data }) => {
           <SquarePen />
         </button>
         <button
-          onClick={() => dispatch(userDelete(data?.id))}
+          onClick={() => {
+            (setDeletePopup(true), dispatch(userDelete(data?.id)));
+          }}
           className="bg-black p-3 text-white rounded-full active:scale-85 duration-300"
         >
           <Trash2 />
@@ -52,6 +56,13 @@ const Card = ({ data }) => {
         >
           <EditUserForm formId={"editUser"} data={data} setOpen={setOpen} />
         </Dialog>
+      )}
+      {deletePopup && (
+        <Dialog
+          message="Are you sure delete this person"
+          text="Delete"
+          style={{ height: "160px", fontSize: "1.5rem", padding: "0px 10px" }}
+        />
       )}
     </div>
   );
